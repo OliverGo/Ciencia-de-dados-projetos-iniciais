@@ -1,0 +1,17 @@
+-------------------------------------------------------------------
+
+-> OBTER lista_todos_usuario -> cria uma lista com todos os lista_de_usuarios
+-> OBTER lista_usuarios_inativos -> cria uma lista com usuarios inativos 
+
+-> PARA cada usuario em lista_de_usuarios -> filtra os usuarios inativos 
+ 
+SE usuario > 30 -> se o usuario estiver inativo a mais de 30 dias -> caso o usuario nao tenha mais registros apos 30 dias 
+    ADICIONA usuario A lista_de_usuarios_inativos -> apenas adiciona o usuario na lista de usuarios inativos
+FIM
+
+
+SE usuario < 30: -> caso o usuario possua algum registro em menos de 30 dias
+CRIAR mensagem_personalizada -> cria uma mensagem
+ENVIA mensagem_personalizada PARA lista_de_usuarios_inativos -> envia ao usuario convidando-o a voltar 
+FIM 
+

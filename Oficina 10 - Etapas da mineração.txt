@@ -1,0 +1,22 @@
+Oficina 10 - Etapas da mineração 
+''''''''''''''''''''''''''''''''
+
+Processo CRISP-DM - Rede de supermercado 
+
+-> Entendimento do negócio 
+	* Objetivo: Atrair mais clientes apoiadores 
+	* Qual o impacto financeiro: Aumentar os lucros
+	* Quais variáveis podem influenciar: Idade, sexo, renda, histórico de compras
+-> Entendimento de dados 
+	* Coletar dados como: idade, sexo, renda, histórico de compras, frequência de compras 
+-> Preparação dos dados
+	* Tratar valores faltantes
+	* codificar variáveis (sexo = 0 ou 1)
+	* Normalização dos dados 
+-> Modelagem 
+	* Algoritmo para modela os dados: Floresta de decisões 
+-> Avaliação
+	* Testando o modelo 
+	* Analisando a matriz de confusão 
+
+
