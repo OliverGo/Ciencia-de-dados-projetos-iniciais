@@ -1,10 +1,26 @@
 import speech_recognition as sr
-import tkinter as tk 
 import chess
 import re
 
-
+board = chess.Board()
+print(board)
+print(board.legal_moves)
      
+def movimento(origem, destino):
+    try:
+        print(f"Esses são os movimentos validos: {board.legal_moves}")
+        origem = chess.parse_square(origem)
+        destino = chess.parse_square(destino)
+        movimento = chess.Move(origem, destino)
+        if movimento in board.legal_moves:
+            board.push(movimento)
+            print(board)
+        else:
+            print("movimento inválido")
+    except ValueError as e:
+        print(f"movimento irreconhecido (lista inválida)")    
+
+
 
 recognizer = sr.Recognizer()
 
@@ -17,16 +33,19 @@ def normalizar_numeros(texto):
     for palavra, numero in numeros.items():
         texto = texto.replace(palavra, numero)
     return texto
-
-
+origem = []
+destino = []
 def converte_comando(texto):
-    
+
     texto = texto.lower()
     texto = normalizar_numeros(texto)
-    texto = texto.replace(" ", "").replace("para", "")
+    texto = texto.replace(" ", "").replace("para", "").replace("é", "e")
     match = re.match(r"([a-h][1-8])([a-h][1-8])", texto)
     if match:
-         return match.group(1) + match.group(2)
+        origem.append(match.group(1))
+        destino.append(match.group(2))
+        return match.group(1) + match.group(2)
+         
     else:
         return "Numero/cassa irregular"
 
@@ -39,7 +58,9 @@ while True:
             texto = recognizer.recognize_google(audio, language='pt-BR')
             texto = texto.lower()
             print(f"{converte_comando(texto)}")
+            movimento(origem, destino)
+            print(origem, destino)
         except sr.UnknownValueError as erro:
             print("Não entendi o que você disse")
             recognizer
-            continue 
+            continue
