@@ -1,6 +1,6 @@
-import speech_recognition as sr
-import chess
-import re
+import speech_recognition as sr # Biblioteca para reconhecimeto de voz
+import chess # Biblioteca para manipulação de xadrez
+import re # Biblioteca para expressões regulares 
 
 board = chess.Board()
 print(board)
