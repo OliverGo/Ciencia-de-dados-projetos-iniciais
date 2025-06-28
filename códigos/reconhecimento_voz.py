@@ -2,9 +2,33 @@ import speech_recognition as sr # Biblioteca para reconhecimeto de voz
 import chess # Biblioteca para manipulação de xadrez
 import re # Biblioteca para expressões regulares 
 
-board = chess.Board()
-print(board)
-print(board.legal_moves)
+
+board = chess.Board() 
+pecas_unicode = {
+    "P": "♙", "R": "♖", "N": "♘", "B": "♗", "Q": "♕", "K": "♔",
+    "p": "♟", "r": "♜", "n": "♞", "b": "♝", "q": "♛", "k": "♚"
+}
+
+def imprimir_tabuleiro_unicode(board):
+    print()
+    for linha in range(7, -1, -1):  # 8 até 1
+        linha_str = f"{linha + 1} "
+        for coluna in range(8):
+            square = chess.square(coluna, linha)
+            peca = board.piece_at(square)
+            if peca:
+                linha_str += pecas_unicode[peca.symbol()] + " "
+            else:
+                linha_str += ". "
+        print(linha_str)
+    print("  a b c d e f g h")
+
+# Exemplo de uso
+tabuleiro = imprimir_tabuleiro_unicode(board)
+print(tabuleiro)
+
+
+
      
 def movimento(origem, destino):
     try:
@@ -14,9 +38,10 @@ def movimento(origem, destino):
         movimento = chess.Move(origem, destino)
         if movimento in board.legal_moves:
             board.push(movimento)
-            print(board)
+            print(imprimir_tabuleiro_unicode(board))
         else:
             print("movimento inválido")
+            print(imprimir_tabuleiro_unicode(board))
     except ValueError as e:
         print(f"movimento irreconhecido (lista inválida)")    
 
