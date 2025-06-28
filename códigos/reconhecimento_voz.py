@@ -27,7 +27,8 @@ def converte_comando(texto):
     match = re.match(r"([a-h][1-8])([a-h][1-8])", texto)
     if match:
          return match.group(1) + match.group(2)
-    return None
+    else:
+        return "Numero/cassa irregular"
 
 while True:
     with sr.Microphone() as mic:
@@ -37,7 +38,7 @@ while True:
         try:
             texto = recognizer.recognize_google(audio, language='pt-BR')
             texto = texto.lower()
-            print(f"{texto}")
+            print(f"{converte_comando(texto)}")
         except sr.UnknownValueError as erro:
             print("Não entendi o que você disse")
             recognizer
