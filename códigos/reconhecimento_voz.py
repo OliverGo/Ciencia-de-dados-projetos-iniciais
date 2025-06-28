@@ -33,8 +33,7 @@ def normalizar_numeros(texto):
     for palavra, numero in numeros.items():
         texto = texto.replace(palavra, numero)
     return texto
-origem = []
-destino = []
+
 def converte_comando(texto):
 
     texto = texto.lower()
@@ -42,13 +41,11 @@ def converte_comando(texto):
     texto = texto.replace(" ", "").replace("para", "").replace("é", "e")
     match = re.match(r"([a-h][1-8])([a-h][1-8])", texto)
     if match:
-        origem.append(match.group(1))
-        destino.append(match.group(2))
-        return match.group(1) + match.group(2)
-         
+        origem = match.group(1)
+        destino = match.group(2)
+        return origem + destino
     else:
-        return "Numero/cassa irregular"
-
+        print(texto)
 while True:
     with sr.Microphone() as mic:
         recognizer.adjust_for_ambient_noise(mic, duration=0.3)
@@ -57,9 +54,13 @@ while True:
         try:
             texto = recognizer.recognize_google(audio, language='pt-BR')
             texto = texto.lower()
-            print(f"{converte_comando(texto)}")
-            movimento(origem, destino)
-            print(origem, destino)
+            comando = converte_comando(texto)
+            if isinstance(comando, str):
+                print(comando)
+                movimento(comando[:2], comando[2:])
+            else:
+                print(f"movimento invalido: {texto}")
+                continue
         except sr.UnknownValueError as erro:
             print("Não entendi o que você disse")
             recognizer
