@@ -39,6 +39,8 @@ def movimento(origem, destino):
         if movimento in board.legal_moves:
             board.push(movimento)
             print(imprimir_tabuleiro_unicode(board))
+            vez = "BRANCAS" if board.turn else "PRETAS"
+            print(f"Agora é a vez das {vez}")
         else:
             print("movimento inválido")
             print(imprimir_tabuleiro_unicode(board))
